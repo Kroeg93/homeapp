@@ -28,7 +28,7 @@ func GetLightbulb(id int) (LightbulbDTO, error) {
 
 func GetLightbulbs() (LightbulbsDTO, error) {
 	client := resty.New()
-	url := fmt.Sprintf("http://%s/api/%s/lights", HueBridgeIp, HueUserName)
+	url := fmt.Sprintf("http://%s/api/%s/lights", os.Getenv("HUE_BRIDGE_IP"), os.Getenv("HUE_USER"))
 	var lightbulbs LightbulbsDTO
 
 	res, err := client.R().
