@@ -1,12 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"services/lightning/handlers"
 )
 
+const BaseUrl = "localhost"
+const Port = "5175"
+
 func main() {
+	var ServiceUrl = fmt.Sprintf("%s:%s", BaseUrl, Port)
 	const FrontendUrl = "http://localhost:5174"
 
 	router := gin.Default()
@@ -17,9 +21,5 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	router.GET("api/lightning/lightbulb", handlers.GetLightbulbs)
-	router.GET("api/lightning/lightbulbs", handlers.GetLightbulbs)
-	//router.POST('api/lightning/lightbulb/:?/state', handlers.ChangeLightbulbState)
-
-	router.Run("127.0.0.1:3000")
+	router.Run(ServiceUrl)
 }

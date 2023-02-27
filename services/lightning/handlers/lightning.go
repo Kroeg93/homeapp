@@ -11,39 +11,43 @@ import (
 )
 
 func GetLightbulb(c *gin.Context) {
-	var lightbulb LightbulbDTO
+	var light LightDTO
 
-	lightbulb, err := api.GetLightbulb(1)
+	light, err := api.GetLightbulb(1)
 
 	if err != nil {
 		log.Println("Error while fetching lightbulbs")
 		log.Println(err)
 		c.JSON(http.StatusNotFound, nil)
 	} else {
-		fmt.Println("SUCCESS: %v", lightbulb)
+		fmt.Println("SUCCESS: %v", light)
 	}
 
-	c.JSON(http.StatusOK, lightbulb)
+	c.JSON(http.StatusOK, light)
 }
 
 func GetLightbulbs(c *gin.Context) {
-	var lightbulbsDTO LightbulbsDTO
+	var lightbulbsDTO LightsDTO
 
 	lightbulbsDTO, err := api.GetLightbulbs()
 
 	if err != nil {
-		log.Println("Error while fetching lightbulbs")
+		log.Println("Error while fetching lights")
 		log.Println(err)
 		c.JSON(http.StatusNotFound, nil)
 	} else {
 		fmt.Println("SUCCESS: %v", lightbulbsDTO)
 	}
 
-	var lightbulbs []LightbulbDTO
+	var lights []LightDTO
 
 	for _, value := range lightbulbsDTO {
-		lightbulbs = append(lightbulbs, value)
+		lights = append(lights, value)
 	}
 
-	c.JSON(http.StatusOK, lightbulbs)
+	c.JSON(http.StatusOK, lights)
+}
+
+func ChangeLightbulbState(c *gin.Context) {
+
 }

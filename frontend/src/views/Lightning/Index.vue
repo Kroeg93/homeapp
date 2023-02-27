@@ -2,36 +2,21 @@
   <div class="container mx-auto">
     <h1>Beleuchtung</h1>
 
-    <ul>
-      <li v-for="(lightbulb, index) in state.lightbulbs" :key="lightbulb.id">
-        <div class="ml-3">
-          <p class="text-sm font-medium text-gray-900">{{ lightbulb.id }}</p>
-          <p class="text-sm text-gray-500">{{ lightbulb.name }}</p>
-        </div>
-      </li>
-    </ul>
-
+    <LightbulbList v-bind:lightbulbs="lightbulbs" ></LightbulbList>
   </div>
 </template>
 
-<script>
-  import { reactive, onMounted } from 'vue'
+<script setup>
+import { onMounted, ref } from 'vue'
   import {fetchLightbulbs} from '../../api/lightning'
+  import LightbulbList from "../../components/lightning/LightbulbList.vue";
 
-  export default {
-    setup() {
-      const state = reactive({
-        lightbulbs: null
-      })
+  const lightbulbs = ref()
 
-      onMounted(async () => {state.lightbulbs = await fetchLightbulbs()})
-
-      console.log(state.lightbulbs)
-
-      return {
-        state
-      }
-    }
+  const getLightbulbs = async () => {
+    lightbulbs.value = await fetchLightbulbs()
   }
+
+  onMounted(async () => getLightbulbs())
 </script>
 

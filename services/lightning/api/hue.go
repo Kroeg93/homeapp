@@ -7,11 +7,11 @@ import (
 	. "services/lightning/models"
 )
 
-func GetLightbulb(id int) (LightbulbDTO, error) {
+func GetLightbulb(id int) (LightDTO, error) {
 	client := resty.New()
 	url := fmt.Sprintf("http://%s/api/%s/lights/%d", os.Getenv("HUE_BRIDGE_IP"), os.Getenv("HUE_USER"), id)
 
-	var lightbulb LightbulbDTO
+	var lightbulb LightDTO
 
 	res, err := client.R().
 		SetResult(&lightbulb).
@@ -26,10 +26,10 @@ func GetLightbulb(id int) (LightbulbDTO, error) {
 	return lightbulb, nil
 }
 
-func GetLightbulbs() (LightbulbsDTO, error) {
+func GetLightbulbs() (LightsDTO, error) {
 	client := resty.New()
 	url := fmt.Sprintf("http://%s/api/%s/lights", os.Getenv("HUE_BRIDGE_IP"), os.Getenv("HUE_USER"))
-	var lightbulbs LightbulbsDTO
+	var lightbulbs LightsDTO
 
 	res, err := client.R().
 		SetResult(&lightbulbs).

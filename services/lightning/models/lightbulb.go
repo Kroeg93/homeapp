@@ -1,8 +1,8 @@
 package models
 
-type LightbulbsDTO = map[string]LightbulbDTO
+type LightsDTO = map[string]LightDTO
 
-type LightbulbDTO struct {
+type LightDTO struct {
 	State            State        `json:"state"`
 	Swupdate         Swupdate     `json:"swupdate"`
 	Type             string       `json:"type"`
