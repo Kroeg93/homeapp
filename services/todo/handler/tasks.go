@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	. "services/todo/models"
+	"services/todo/repositories"
 	"strconv"
 )
 
@@ -28,47 +29,46 @@ func GetTask(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	var dummyTask = Task{
-		ID:          id,
-		Title:       "Task 1",
-		Description: "This is a task",
-		Completed:   false,
+	task, err := repositories.GetTaskById(id)
+	if err != nil {
+		fmt.Println("Could not get task from database")
 	}
 
-	json.NewEncoder(w).Encode(dummyTask)
+	json.NewEncoder(w).Encode(task)
 }
 
 // GetTasks Handler for returning a slice of tasks
 func GetTasks(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Incoming Request on /getTasks")
 
-	var dummyTasks = []Task{
-		{
-			ID:          1,
-			Title:       "Task 1",
-			Description: "This is a task",
-			Completed:   false,
-		},
-		{
-			ID:          2,
-			Title:       "Task 2",
-			Description: "This is a task",
-			Completed:   false,
-		},
-		{
-			ID:          3,
-			Title:       "Task 3",
-			Description: "This is a task",
-			Completed:   false,
-		},
-		{
-			ID:          4,
-			Title:       "Task 4",
-			Description: "This is a task",
-			Completed:   false,
-		},
+	w.Header().Set("Content-Type", "application/json")
+
+	tasks, err := repositories.GetAllTasks()
+	if err != nil {
+		fmt.Println("Could not get tasks from database")
+	}
+
+	json.NewEncoder(w).Encode(tasks)
+}
+
+// CreateTask Handler for creating a new task
+func CreateTask(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Incoming Request on /createTask")
+
+	var task Task
+
+	err := json.NewDecoder(r.Body).Decode(&task)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(dummyTasks)
+
+	newTask, err := repositories.CreateTask(task)
+	if err != nil {
+		fmt.Println("Could not create task in database")
+	}
+
+	json.NewEncoder(w).Encode(newTask)
 }

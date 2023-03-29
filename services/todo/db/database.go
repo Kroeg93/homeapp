@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-var db *sql.DB
+var Db *sql.DB
 
 func Init() {
 	fmt.Println("Connecting to database")
@@ -23,13 +23,13 @@ func Init() {
 
 	// Get a database handle
 	var err error
-	db, err = sql.Open("mysql", cfg.FormatDSN())
+	Db, err = sql.Open("mysql", cfg.FormatDSN())
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Check if database is reachable
-	err = db.Ping()
+	err = Db.Ping()
 	if err != nil {
 		log.Fatal(err)
 	}
