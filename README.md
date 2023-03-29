@@ -22,3 +22,9 @@ There are two ENV-Variables which need to be exported before the application can
 - export HUE_USER=generated_hue_user
 
 - Inside `/services/lightning` run `go mod tidy` and afterwards `go run .`
+
+## Go - Wissenswertes
+### Runes
+Runes sind 32 Bit Integer Werte, welche Unicode Codepoints repräsentieren  
+Z.b. 36, welches für 'f' steht. (https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters)
+

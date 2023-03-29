@@ -49,5 +49,16 @@ func GetLightbulbs(c *gin.Context) {
 }
 
 func ChangeLightbulbState(c *gin.Context) {
+	fmt.Println("Incoming")
 
+	id := c.Param("id")
+
+	c.JSON(http.StatusCreated, fmt.Sprint("Hello, u are id: ", id))
+}
+
+func DeleteLightbulb(c *gin.Context) {
+	fmt.Println("Incoming")
+	id := c.Param("id")
+
+	c.JSON(http.StatusCreated, fmt.Sprint("Hello, u are id: ", id))
 }

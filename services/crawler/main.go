@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"services/crawler/lib"
 )
 
 const BaseUrl = "localhost"
@@ -20,6 +21,8 @@ func main() {
 		AllowHeaders:     []string{"Origin", "Content-Type"},
 		AllowCredentials: true,
 	}))
+
+	lib.Crawl()
 
 	router.Run(ServiceUrl)
 }
