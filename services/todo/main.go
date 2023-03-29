@@ -3,10 +3,13 @@ package main
 import (
 	"github.com/gorilla/mux"
 	"net/http"
+	"services/todo/db"
 	. "services/todo/handler"
 )
 
 func main() {
+	db.Init()
+
 	router := mux.NewRouter()
 
 	router.HandleFunc("/getTask/{id}", GetTask).Methods("GET")
