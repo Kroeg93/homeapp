@@ -19,8 +19,7 @@ func main() {
 
 	router.GET("api/lightning/lightbulb", handlers.GetLightbulbs)
 	router.GET("api/lightning/lightbulbs", handlers.GetLightbulbs)
-	router.POST("api/lightning/lightbulb/:id/state", handlers.ChangeLightbulbState)
-	router.DELETE("api/lightning/lightbulb/:id", handlers.DeleteLightbulb)
+	//router.POST('api/lightning/lightbulb/:?/state', handlers.ChangeLightbulbState)
 
 	router.Run("127.0.0.1:3000")
 }
