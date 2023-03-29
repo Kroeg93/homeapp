@@ -1,3 +1,10 @@
 go 1.20
 
-use .
+use (
+	.
+	./db
+	./models
+	./handler
+)
+
+
